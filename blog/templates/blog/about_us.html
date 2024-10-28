@@ -1,0 +1,73 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}About Reanstartup - Empowering Cambodian Startup Founders{% endblock %}
+
+{% block meta %}
+<meta name="description" content="Reanstartup is your go-to resource for aspiring Cambodian startup founders. Learn essential skills, dive deep into startup ideas, and build your MVP with our expert guidance.">
+<meta name="keywords" content="Cambodian startups, startup founders, entrepreneurship, MVP, startup skills">
+<meta property="og:title" content="About Reanstartup - Empowering Cambodian Startup Founders">
+<meta property="og:description" content="Reanstartup is your go-to resource for aspiring Cambodian startup founders. Learn essential skills, dive deep into startup ideas, and build your MVP with our expert guidance.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+{% endblock %}
+
+{% block content %}
+<section class="about-us container py-5">
+    <div class="text-center">
+        <h1 class="fw-bold">About Reanstartup</h1>
+        <p class="mx-auto" style="max-width: 700px;">
+            Welcome to our blog, your go-to resource for aspiring Cambodian startup founders who are ready to turn their ideas into
+            successful businesses. We believe in the power of entrepreneurship and are dedicated to helping you acquire the
+            essential skills, knowledge, and insights needed to thrive in the startup ecosystem.
+        </p>
+    </div>
+    <div class="row mt-5 icon-section">
+        <div class="col-md-6 col-sm-6 feature mb-5">
+            <i class="fas fa-laptop-code"></i>
+            <h3 class="fw-bold mt-4">1. Master the Essentials</h3>
+            <p class="text-justify">In this section, we help you build critical skills needed to succeed in the startup world. Whether it's programming for
+            your tech stack, honing your pitching skills, conducting in-depth market research, or developing other essential
+            entrepreneurial competencies, we’ve got you covered. We aim to empower you with practical, actionable advice to prepare
+            you for the challenges ahead.</p>
+        </div>
+        <div class="col-md-6 col-sm-6 feature mb-5">
+            <i class="fas fa-cogs" style="color: #000000;"></i>
+            <h3 class="fw-bold mt-4">2. Startup Deep Dive</h3>
+            <p class="text-justify">Every great startup starts with a solid idea and strategic planning. In our Startup Deep Dive, we take a comprehensive
+            look at various startup ideas, analyzing them from all angles. You'll learn about identifying and solving problems,
+            crafting revenue and pricing models, understanding your target customers, analyzing competitors, and more. This content
+            is designed to give you a clear understanding of what it takes to bring an idea to life.</p>
+        </div>
+        <div class="col-md-6 col-sm-6 feature mb-5">
+            <i class="fas fa-rocket"></i>
+            <h3 class="fw-bold mt-4">3. MVP Playbook</h3>
+            <p class="text-justify">The MVP Playbook provides a step-by-step guide on building a Minimum Viable Product (MVP) for your startup. We break
+            down the entire process, from concept to execution, helping you understand the technical, operational, and strategic
+            aspects of building an MVP. You’ll gain insights into how to quickly and efficiently test your product in the market,
+            iterate, and refine it based on customer feedback.</p>
+        </div>
+        <div class="col-md-6 col-sm-6 feature mb-5">
+            <i class="far fa-lightbulb"></i>
+            <h3 class="fw-bold mt-4">4. Fun Startup Breakdown</h3>
+            <p class="text-justify">Got a startup idea you’re curious about? In our Fun Startup Breakdown, we take startup ideas from our audience and dive
+            into the details just for fun! We’ll break down your concept, examine the problem you’re solving, explore potential
+            revenue models, analyze customer segments, and even speculate on competitor strategies. It’s a creative way to think
+            through startup concepts and enjoy the process of exploration and innovation.</p>
+        </div>
+    </div>
+
+    <div class="container mt-5 mb-5 pb-5">
+        <div class="row">
+            <div class="col-lg-3 text-center">
+                <h2 class="fw-bold">Our Mission</h2>
+            </div>
+            <div class="col-lg-9">
+                <p class="mx-auto text-justify" style="max-width: 700px;">
+                    Our mission is to equip you with the tools and insights you need to navigate the startup world, overcome challenges, and
+                    ultimately succeed. Let's build the future of Cambodian entrepreneurship together.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

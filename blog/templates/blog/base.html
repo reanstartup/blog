@@ -1,0 +1,227 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <title>{% block title %}reanstartup{% endblock %}</title>
+    <meta name="description" content="Reanstartup is reanstartup is your go-to resource for aspiring Cambodian startup founders who are ready to turn their ideas into
+                                successful businesses.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{% static 'favicon/favicon.ico' %}" type="image/x-icon" sizes="any">
+    {% block meta %}{% endblock %}
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "{{ post.title }}",
+      "image": "{{ post.image_url }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ post.author }}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Reanstartup",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://yourdomain.com/logo.png"
+        }
+      },
+      "datePublished": "{{ post.created_at|date:"c" }}",
+      "dateModified": "{{ post.updated_at|date:"c" }}",
+      "description": "{{ post.excerpt|truncatewords:30 }}",
+      "keywords": "{{ post.tags.all|join:", " }}"
+    }
+    </script>
+
+</head>
+<body>
+    <!-- <header>
+        <nav class="navbar navbar-expand-lg ftco_navbar ftco-navbar-light" id="ftco-navbar">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'index' %}">reanstartup</a>
+                <div class="social-media order-lg-last">
+                    <p class="mb-0 d-flex">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fab fa-facebook-f"><i
+                                    class="sr-only">Facebook</i></span></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fab fa-twitter"><i
+                                    class="sr-only">Twitter</i></span></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fab fa-instagram"><i
+                                    class="sr-only">Instagram</i></span></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fab fa-dribbble"><i
+                                    class="sr-only">Dribbble</i></span></a>
+                    </p>
+                </div>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                    aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="navbar-collapse collapse" id="ftco-nav">
+                    <ul class="navbar-nav ml-auto mr-md-3">
+                        <li class="nav-item active"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="{% url 'about_us' %}" class="nav-link">About Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header> -->
+    <main class="main">
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer class="footer">
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-lg-3 hide">
+                    <div class="footer-links">
+                        <h5 class="fw-bold footer-link--text pr-5">Dream it, Pitch it, <br>Launch it!</h5>
+                    </div>
+                </div>
+                <div class="col-lg-6" style="text-align: center;">
+                    <h1 class="fw-bold">Reanstartup</h1>
+                </div>
+                <div class="col-lg-3 hide">
+                    <div class="footer-links" style="text-align: end;">
+                        <ul>
+                            <li><a class="footer-link" href="{% url 'index' %}">Home</a></li>
+                            <li><a class="footer-link" href="{% url 'about_us' %}">About Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="footer-links">
+                                <ul>
+                                    <li><a class="footer-link" href="{% url 'index' %}">Home</a></li>
+                                    <li><a class="footer-link" href="{% url 'about_us' %}">About Us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="footer-links">
+                                <div class="social-media order-lg-last">
+                                    <p class="mb-0 d-flex">
+                                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fab fa-facebook-f"><i
+                                                    class="sr-only">Facebook</i></span></a>
+                                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fab fa-twitter"><i
+                                                    class="sr-only">Twitter</i></span></a>
+                                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fab fa-instagram"><i
+                                                    class="sr-only">Instagram</i></span></a>
+                                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fab fa-dribbble"><i
+                                                    class="sr-only">Dribbble</i></span></a>
+                                    </p>
+                                </div>
+                            </div>
+                            <form id="subscribeForm">
+                                {% csrf_token %}
+                                <div class="email-form">
+                                    <input class="input-form" type="email" name="email" placeholder="Subscribe To Our Mailing List" required>
+                                    <button type="submit"> <i class="fas fa-paper-plane"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                    <h5 class="footer-link--title">Subscribe To Our Mailing List </h5> 
+                    
+                </div> -->
+            </div>
+            <!-- <div class="row mt-4">
+                <div class="col-md-12 text-center">
+                    <p class="copyright">
+                        
+                        Copyright ©2024 reanstartup
+                        
+                    </p>
+                </div>
+            </div> -->
+        </div>
+    </footer>
+    <script>
+    function showToast(message, isSuccess = true) {
+        const toastElement = document.getElementById('subscribeToast');
+        const toastBody = toastElement.querySelector('.toast-body');
+        const toast = new bootstrap.Toast(toastElement);
+
+        toastBody.textContent = message;
+        
+        // Add success or error class
+        toastElement.classList.remove('bg-success', 'bg-danger', 'text-white');
+        if (isSuccess) {
+            toastElement.classList.add('bg-success', 'text-white');
+        } else {
+            toastElement.classList.add('bg-danger', 'text-white');
+        }
+
+        toast.show();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const subscribeForm = document.getElementById('subscribeForm');
+        if (subscribeForm) {
+            subscribeForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const form = e.target;
+                const formData = new FormData(form);
+
+                fetch('{% url 'subscribe_mailing_list' %}', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': formData.get('csrfmiddlewaretoken'),
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        showToast(data.message, true);
+                        form.reset();
+                    } else {
+                        showToast(data.message, false);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showToast('An error occurred. Please try again.', false);
+                });
+            });
+        }
+    });
+    </script>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div id="subscribeToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <strong class="me-auto">Subscription</strong>
+          <small>Just now</small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          <!-- Toast message will be inserted here -->
+        </div>
+      </div>
+    </div>
+</body>
+</html>

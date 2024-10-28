@@ -1,0 +1,24 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<div id="content-main">
+    <div class="module">
+        <table>
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Subscribed At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subscriber in subscribers %}
+                <tr>
+                    <td>{{ subscriber.email }}</td>
+                    <td>{{ subscriber.subscribed_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
