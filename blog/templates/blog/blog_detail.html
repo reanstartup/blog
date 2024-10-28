@@ -50,6 +50,36 @@
             <div class="blog-post-updated mt-3">
                 <small class="text-muted">Last updated: {{ post.updated_at|date:"F d, Y H:i" }}</small>
             </div>
+            <div class="footer-links mt-3">
+                <div class="social-media order-lg-last">
+                    <p class="mb-0 d-flex">
+                        <!-- Facebook Share -->
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" class="d-flex align-items-center justify-content-center">
+                            <span class="fab fa-facebook-f"><i class="sr-only">Facebook</i></span>
+                        </a>
+
+                        <!-- Twitter Share -->
+                        <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title }}" target="_blank" class="d-flex align-items-center justify-content-center">
+                            <span class="fab fa-twitter"><i class="sr-only">Twitter</i></span>
+                        </a>
+
+                        <!-- Messenger Share -->
+                        <a href="fb-messenger://share/?link={{ request.build_absolute_uri }}" target="_blank" class="d-flex align-items-center justify-content-center">
+                            <span class="fab fa-facebook-messenger"><i class="sr-only">Messenger</i></span>
+                        </a>
+
+                        <!-- Telegram Share -->
+                        <a href="https://t.me/share/url?url={{ request.build_absolute_uri }}&text={{ post.title }}" target="_blank" class="d-flex align-items-center justify-content-center">
+                            <span class="fab fa-telegram-plane"><i class="sr-only">Telegram</i></span>
+                        </a>
+
+                        <!-- Copy URL -->
+                        <button onclick="copyToClipboard('{{ request.build_absolute_uri }}')" class="d-flex align-items-center justify-content-center">
+                            <span class="fas fa-link"><i class="sr-only">Copy Link</i></span>
+                        </button>
+                    </p>
+                </div>
+            </div>
         </footer>
     </article>
 </div>
@@ -88,5 +118,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     console.log('Script loaded');
 });
+
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        alert('Blog URL copied to clipboard!');
+    }, function(err) {
+        console.error('Could not copy text: ', err);
+    });
+}
 </script>
 {% endblock %}

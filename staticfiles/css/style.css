@@ -8666,26 +8666,27 @@ h1, h2, h3, h4, h5,
     .ftco-navbar-light .navbar-toggler:focus {
       outline: none !important; }
 
-.social-media p a {
+.social-media p a ,button{
   border: 1px solid #e6e6e6;
+  background-color: #fff;
   width: 40px;
   height: 40px;
   border-radius: 50%;
   text-decoration: none;
   margin-right: 4px; }
-  .social-media p a span {
+  .social-media p a span,button span{
     color: #4d4d4d; }
-  .social-media p a:hover {
+  .social-media p a:hover ,button:hover {
     background: rgba(0, 0, 0, 0.7);
     border-color: rgba(0, 0, 0, 0.7); }
-    .social-media p a:hover span {
+    .social-media p a:hover span ,button:hover span {
       color: #fff; }
-  @media (max-width: 991.98px) {
+  /* @media (max-width: 991.98px) {
     .social-media p a {
       border-color: #fff;
       width: 30px;
       height: 30px; }
       .social-media p a span {
         color: #fff; } 
-      }
+      } */
 
