@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure-0ybsk7h-nn&-mx0sda(0y*+a6s^up4jd5n&a-1b9bi_*o6=n$7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['reanstartup.pythonanywhere.com','www.reanstartup.com']
+ALLOWED_HOSTS = ['reanstartup.pythonanywhere.com','www.reanstartup.com','127.0.0.1']
 
 # Application definition
 

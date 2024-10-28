@@ -4,6 +4,7 @@ from django.utils.text import slugify
 from tinymce.models import HTMLField
 from firebase_admin import firestore
 from django.contrib import admin
+from django.urls import reverse
 
 CONTENT_TYPE_CHOICES = [
     ('MVP', 'MVP'),
@@ -38,6 +39,9 @@ class BlogPost(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('blog_detail', kwargs={'slug': self.slug})
 
 class Subscriber(models.Model):
     class Meta:
