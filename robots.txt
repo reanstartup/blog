@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+
+Allow: /
+Allow: /about-us/
+Allow: /blog/
+
+# Sitemap (if you have one)
+Sitemap: https://www.reanstartup.com/sitemap.xml

@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure-0ybsk7h-nn&-mx0sda(0y*+a6s^up4jd5n&a-1b9bi_*o6=n$7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['reanstartup.pythonanywhere.com','www.reanstartup.com']
 
 # Application definition
 
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',  # Make sure this line is present
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
     'blog',
     'tinymce',
 ]
