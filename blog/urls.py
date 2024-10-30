@@ -20,6 +20,7 @@ urlpatterns = [
     path('subscribe/', views.subscribe_mailing_list, name='subscribe_mailing_list'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'favicon/favicon.ico')),
+    path('like/<str:post_id>/', views.like_post, name='like_post'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

@@ -19,7 +19,7 @@
                     </div>
                     {% endif %}
                     <div class="card-body">
-                        <h4 class="card-title text-black">{{ post.title }}</h4>
+                        <h4 class="card-title text-black pb-2">{{ post.title }}</h4>
                         <small class="text-muted cat">
                             {% if post.tags %}
                             <div class="post-tags">
@@ -29,13 +29,13 @@
                             </div>
                             {% endif %}
                         </small>
-                        <p class="card-text text-black">{{ post.excerpt }}</p>
+                        <p class="card-text text-black pt-3">{{ post.excerpt }}</p>
                     </div>
                     <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
                         <div class="views">{{ post.created_at|date:"F d, Y" }}</div>
                         <div class="stats">
                             <i class="far fa-eye"></i> {{ post.views_count }}
-                            <!-- <i class="far fa-comment"></i> {{ post.likes_count }} -->
+                            <i class="far fa-heart"></i> {{ post.likes_count }}
                         </div>
                     </div>
                 </div>

@@ -3,6 +3,7 @@ from django.contrib import messages
 from firebase_admin import firestore
 from .firebase_auth import initialize_firebase
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 # Initialize Firebase
 initialize_firebase()
@@ -72,4 +73,22 @@ def subscribe_mailing_list(request):
         else:
             return JsonResponse({'status': 'error', 'message': 'Please enter a valid email address.'})
     
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
+
+@csrf_exempt
+def like_post(request, post_id):
+    if request.method == 'POST':
+        db = firestore.client()
+        doc_ref = db.collection('blog_posts').document(post_id)
+        doc = doc_ref.get()
+
+        if doc.exists:
+            post = doc.to_dict()
+            new_like_count = post.get('likes_count', 0) + 1
+            doc_ref.update({'likes_count': new_like_count})
+
+            return JsonResponse({'status': 'success', 'new_like_count': new_like_count})
+        else:
+            return JsonResponse({'status': 'error', 'message': 'Post not found.'})
+
     return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})

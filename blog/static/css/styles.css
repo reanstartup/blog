@@ -1,3 +1,43 @@
+@font-face {
+    font-family: 'Sailec';
+    src: url('/static/fonts/sailec-bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Sailec';
+    src: url('/static/fonts/sailec-light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Sailec';
+    src: url('/static/fonts/sailec-medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Sailec';
+    src: url('/static/fonts/sailec-regular-italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Sailec';
+    src: url('/static/fonts/sailec-thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+/* Apply the font to the whole site */
+body {
+    font-family: 'Sailec', sans-serif;
+}
+
 .bg-primary {
     background: #fc7fb2 !important;
 }
@@ -445,12 +485,23 @@ h5 {
     color: #666;
 }
 
-.blog-post-stats span {
-    margin-right: 15px;
+.blog-post-stats .likes {
+    margin-left:15px;
 }
 
 .blog-post-tags {
     margin-top: 15px;
+}
+
+#likeButton {
+    border: 1px solid #e6e6e6;
+    background-color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    text-decoration: none;
+    margin-left: 15px;
+    color: #ff4438;
 }
 
 .tag-badge {
@@ -598,4 +649,56 @@ h5 {
     #qrCode {
         max-height: 70vh;
     }
+}
+
+#screen h1 {
+    display: block;
+    font-size: 60px;
+    margin: 8%;
+}
+
+@media (max-width: 768px) {
+    #screen h1 {
+        display: none;
+    }
+}
+
+#mobile h1 {
+    display: none;
+    font-size: 30px;
+    margin: 3%;
+}
+
+@media (max-width: 768px) {
+    #mobile h1 {
+        display: block;
+    }
+}
+
+
+
+.toast-container {
+    display: none;
+    /* Initially hidden */
+    /* Add your other styles here */
+}
+/* Apply the Sailec font to specific elements */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Sailec', sans-serif;
+    font-weight: bold; /* Default to bold for headings */
+}
+
+p, a, span {
+    font-family: 'Sailec', sans-serif;
+    font-weight: 300; /* Default to normal weight */
+    font-style: normal; /* Default to normal style */
+}
+
+/* Adjust styles for bold and italic text */
+strong, b {
+    font-weight: bold;
+}
+
+em, i {
+    font-style: italic;
 }
