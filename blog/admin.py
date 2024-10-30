@@ -14,24 +14,9 @@ class BlogPostAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
     ordering = ('-created_at',)
 
-    fieldsets = (
-        (None, {
-            'fields': ('title', 'slug', 'content', 'image_url')
-        }),
-        ('Publishing', {
-            'fields': ('author', 'is_published', 'published_at')
-        }),
-        ('Metadata', {
-            'fields': ('content_type', 'tags', 'excerpt')
-        }),
-    )
-
     def save_model(self, request, obj, form, change):
         if not obj.author:
             obj.author = request.user.username
-        
-        # Save to SQLite
-        super().save_model(request, obj, form, change)
         
         # Save to Firestore
         db = firestore.client()

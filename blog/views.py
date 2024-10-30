@@ -15,23 +15,21 @@ def index(request):
     blog_posts_ref = db.collection('blog_posts')
     
     try:
-        # Try the query with the composite index
         query = blog_posts_ref.where('is_published', '==', True).order_by('published_at', direction=firestore.Query.DESCENDING)
         docs = query.stream()
         blog_posts = []
         for doc in docs:
             post = doc.to_dict()
-            post['id'] = doc.id  # Add the document ID as 'id'
+            post['id'] = doc.id
             blog_posts.append(post)
     except Exception as e:
-        # If the index is not ready, fall back to a simpler query
         print(f"Error executing query: {e}")
         query = blog_posts_ref.where('is_published', '==', True).limit(10)
         docs = query.stream()
         blog_posts = []
         for doc in docs:
             post = doc.to_dict()
-            post['id'] = doc.id  # Add the document ID as 'id'
+            post['id'] = doc.id
             blog_posts.append(post)
     
     return render(request, 'blog/index.html', {'blog_posts': blog_posts})
@@ -45,11 +43,9 @@ def blog_detail(request, slug):
         post = doc.to_dict()
         post['id'] = doc.id
         
-        # Increment the view count
         new_view_count = post.get('views_count', 0) + 1
         doc_ref.update({'views_count': new_view_count})
         
-        # Update the post dictionary with the new view count
         post['views_count'] = new_view_count
         
         return render(request, 'blog/blog_detail.html', {'post': post})

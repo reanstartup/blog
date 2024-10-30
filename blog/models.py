@@ -32,13 +32,37 @@ class BlogPost(models.Model):
     tags = models.CharField(max_length=200, blank=True)
     likes_count = models.PositiveIntegerField(default=0)
 
+    class Meta:
+        managed = False
+
     def __str__(self):
         return self.title
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-        super().save(*args, **kwargs)
+        # Custom save logic for Firestore
+        db = firestore.client()
+        data = {
+            'title': self.title,
+            'content': self.content,
+            'image_url': self.image_url,
+            'views_count': self.views_count,
+            'content_type': self.content_type,
+            'author': self.author,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+            'published_at': self.published_at,
+            'is_published': self.is_published,
+            'slug': self.slug,
+            'excerpt': self.excerpt,
+            'tags': self.tags,
+            'likes_count': self.likes_count
+        }
+        db.collection('blog_posts').document(self.slug).set(data)
+
+    def delete(self, *args, **kwargs):
+        # Custom delete logic for Firestore
+        db = firestore.client()
+        db.collection('blog_posts').document(self.slug).delete()
 
     def get_absolute_url(self):
         return reverse('blog_detail', kwargs={'slug': self.slug})
