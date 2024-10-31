@@ -8,6 +8,7 @@
                 <tr>
                     <th>Email</th>
                     <th>Subscribed At</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -15,10 +16,52 @@
                 <tr>
                     <td>{{ subscriber.email }}</td>
                     <td>{{ subscriber.subscribed_at }}</td>
+                    <td>
+                        <button class="delete-btn" data-email="{{ subscriber.email }}">Delete</button>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const deleteButtons = document.querySelectorAll('.delete-btn');
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const email = this.getAttribute('data-email');
+            if (confirm(`Are you sure you want to delete ${email}?`)) {
+                fetch(`delete/${email}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        alert(`Subscriber ${email} deleted successfully.`);
+                        this.closest('tr').remove(); // Remove the row from the table
+                    } else {
+                        alert('Failed to delete subscriber.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                });
+            }
+        });
+    });
+});
+</script>
 {% endblock %}

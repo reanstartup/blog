@@ -165,11 +165,15 @@ function copyToClipboard(text) {
 
     document.addEventListener('DOMContentLoaded', function () {
         const subscribeForm = document.getElementById('subscribeForm');
+        const submitButton = subscribeForm.querySelector('button[type="submit"]');
+        const toastElement = document.getElementById('subscribeToast');
         const toastContainer = document.getElementById('toast-container');
 
         if (subscribeForm) {
             subscribeForm.addEventListener('submit', function (e) {
                 e.preventDefault();
+                submitButton.disabled = true; // Disable the button
+
                 const form = e.target;
                 const formData = new FormData(form);
 
@@ -189,16 +193,17 @@ function copyToClipboard(text) {
                     } else {
                         showToast(data.message, false, 'Subscription Error');
                     }
+                    submitButton.disabled = false; // Re-enable the button
                 })
                 .catch(error => {
                     console.error('Error:', error);
                     showToast('An error occurred. Please try again.', false, 'Error');
+                    submitButton.disabled = false; // Re-enable the button
                 });
             });
         }
 
         function showToast(message, isSuccess = true, headerText = 'Notification') {
-            const toastElement = document.getElementById('subscribeToast');
             const toastBody = toastElement.querySelector('.toast-body');
             const toastHeader = document.getElementById('toastHeader');
             

@@ -1,7 +1,9 @@
 from django.contrib import admin
 from .models import BlogPost, Subscriber
 from firebase_admin import firestore
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import path
+from django.http import JsonResponse
 
 # Register your models here.
 
@@ -74,10 +76,25 @@ class SubscriberAdmin(admin.ModelAdmin):
         }
         return render(request, self.change_list_template, context)
 
-    def has_add_permission(self, request):
-        return False
+    def get_urls(self):
+        urls = super().get_urls()
+        custom_urls = [
+            path('delete/<str:email>/', self.admin_site.admin_view(self.delete_subscriber), name='delete_subscriber'),
+        ]
+        return custom_urls + urls
 
-    def has_delete_permission(self, request, obj=None):
+    def delete_subscriber(self, request, email):
+        if request.method == 'POST':
+            try:
+                # Delete subscriber from Firestore using email as document ID
+                db = firestore.client()
+                db.collection('subscribers').document(email).delete()
+                return JsonResponse({'success': True})
+            except Exception as e:
+                return JsonResponse({'success': False, 'error': str(e)})
+        return JsonResponse({'success': False, 'error': 'Invalid request method.'})
+
+    def has_add_permission(self, request):
         return False
 
     def has_change_permission(self, request, obj=None):
