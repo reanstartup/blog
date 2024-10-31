@@ -34,7 +34,7 @@ firebase_admin.initialize_app(cred)
 SECRET_KEY = 'django-insecure-0ybsk7h-nn&-mx0sda(0y*+a6s^up4jd5n&a-1b9bi_*o6=n$7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'FALSE'
+DEBUG = True
 
 ALLOWED_HOSTS = ['www.reanstartup.com','reanstartup.com','reanstartup.pythonanywhere.com','127.0.0.1',]
 
