@@ -14,9 +14,7 @@ from pathlib import Path
 import firebase_admin
 from firebase_admin import credentials
 import os
-import mimetypes
-mimetypes.add_type("text/css", ".css", True)
-
+import whitenoise
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -34,19 +32,11 @@ firebase_admin.initialize_app(cred)
 SECRET_KEY = 'django-insecure-0ybsk7h-nn&-mx0sda(0y*+a6s^up4jd5n&a-1b9bi_*o6=n$7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = [
-    'www.reanstartup.com',
-    'reanstartup.com',
-    'reanstartup.pythonanywhere.com',
-    '127.0.0.1',
-    'localhost',
-]
+ALLOWED_HOSTS = ['reanstartup.pythonanywhere.com','www.reanstartup.com','127.0.0.1','reanstartup.com']
 
-SECURE_SSL_REDIRECT = True  # Redirect HTTP to HTTPS
-CSRF_COOKIE_SECURE = True  # Use secure cookies for CSRF
-SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = False
 
 # Application definition
 
@@ -68,8 +58,8 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # Make sure this line is present
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',# Make sure this line is present
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'blog.middleware.SessionExpirationMiddleware',
 ]
@@ -135,14 +125,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'blog', 'static'),  # Update this path to point to the blog app's static directory
+    os.path.join(BASE_DIR, 'blog', 'static'),  # Ensure this path is correct
 ]
 
 # Default primary key field type
