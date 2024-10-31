@@ -282,8 +282,8 @@ button:hover span {
 
 .footer .footer-links ul li .footer-link {
     text-decoration: none;
+    font-weight: bold;
     font-size: 16px;
-    color: #646d7c;
     line-height: 36px;
     display: inline-block;
     -webkit-transition: 0.3s ease;
@@ -295,7 +295,6 @@ button:hover span {
 }
 
 .footer .footer-links ul li .footer-link:hover {
-    color: rgba(0, 0, 0, 0.7);
     text-decoration: none;
 }
 
