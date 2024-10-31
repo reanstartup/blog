@@ -14,7 +14,9 @@ from pathlib import Path
 import firebase_admin
 from firebase_admin import credentials
 import os
-import whitenoise
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,11 +34,9 @@ firebase_admin.initialize_app(cred)
 SECRET_KEY = 'django-insecure-0ybsk7h-nn&-mx0sda(0y*+a6s^up4jd5n&a-1b9bi_*o6=n$7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['reanstartup.pythonanywhere.com','www.reanstartup.com','127.0.0.1','reanstartup.com']
-
-SECURE_SSL_REDIRECT = False
 
 # Application definition
 
@@ -58,8 +58,8 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',# Make sure this line is present
+    'django.contrib.messages.middleware.MessageMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # Make sure this line is present
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'blog.middleware.SessionExpirationMiddleware',
 ]
@@ -130,9 +130,7 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'blog', 'static'),  # Ensure this path is correct
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
