@@ -489,7 +489,7 @@ h5 {
     margin-top: 15px;
 }
 
-.likeButton {
+#likeButton {
     border: 1px solid #e6e6e6;
     background-color: #fff;
     width: 40px;
@@ -498,18 +498,6 @@ h5 {
     text-decoration: none;
     margin-left: 15px;
     color: #ff4438;
-}
-
-#footer-about-us {
-    display: none;
-    background-color: transparent!important;
-}
-
-@media (max-width: 768px) {
-    #footer-about-us {
-        display: block;
-        background-color: transparent !important;
-    }
 }
 
 .tag-badge {
