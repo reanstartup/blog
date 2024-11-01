@@ -33,13 +33,16 @@ class BlogPost(models.Model):
     likes_count = models.PositiveIntegerField(default=0)
 
     class Meta:
-        managed = False
+        pass
 
     def __str__(self):
         return self.title
 
     def save(self, *args, **kwargs):
-        # Custom save logic for Firestore
+        # First save to Django database
+        super().save(*args, **kwargs)
+        
+        # Then save to Firestore
         db = firestore.client()
         data = {
             'title': self.title,
@@ -60,9 +63,12 @@ class BlogPost(models.Model):
         db.collection('blog_posts').document(self.slug).set(data)
 
     def delete(self, *args, **kwargs):
-        # Custom delete logic for Firestore
+        # Delete from Firestore first
         db = firestore.client()
         db.collection('blog_posts').document(self.slug).delete()
+        
+        # Then delete from Django database
+        super().delete(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('blog_detail', kwargs={'slug': self.slug})

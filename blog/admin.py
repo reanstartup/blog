@@ -20,35 +20,17 @@ class BlogPostAdmin(admin.ModelAdmin):
         if not obj.author:
             obj.author = request.user.username
         
-        # Save to Firestore
-        db = firestore.client()
-        data = {
-            'title': obj.title,
-            'content': obj.content,
-            'image_url': obj.image_url,
-            'views_count': obj.views_count,
-            'content_type': obj.content_type,
-            'author': obj.author,
-            'created_at': obj.created_at,
-            'updated_at': obj.updated_at,
-            'published_at': obj.published_at,
-            'is_published': obj.is_published,
-            'slug': obj.slug,
-            'excerpt': obj.excerpt,
-            'tags': obj.tags,
-            'likes_count': obj.likes_count
-        }
-        db.collection('blog_posts').document(obj.slug).set(data)
+        # The save() method in the model will handle both Django and Firestore
+        super().save_model(request, obj, form, change)
 
     def delete_model(self, request, obj):
-        # Delete from Firestore
-        db = firestore.client()
-        db.collection('blog_posts').document(obj.slug).delete()
+        # The delete() method in the model will handle both Django and Firestore
+        obj.delete()
 
     def delete_queryset(self, request, queryset):
-        db = firestore.client()
+        # Delete each object individually to ensure both databases are updated
         for obj in queryset:
-            db.collection('blog_posts').document(obj.slug).delete()
+            obj.delete()
 
 @admin.register(Subscriber)
 class SubscriberAdmin(admin.ModelAdmin):
